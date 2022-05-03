@@ -1,0 +1,38 @@
+times = int(input(''))
+list1=[]                        #[[카드수, 카드나열], [], []] -> 카드수=[n][0], 나열=[n][1]
+for i in range(times):
+    list2 = []
+    numOf = int(input(''))
+    n = input('')
+    list2.append(numOf)
+    list2.append(n)
+    list1.append(list2)
+
+def dup (listN) :
+    countingMax = 0         #listN[1]=나열
+    counting = 0
+    countingMaxNumSet = set()                 #countingMaxNumSet
+    for i in listN[1]:
+        counting = 0
+        counting = listN[1].count(i)
+        if countingMax < counting:
+            countingMax = counting
+            countingMaxNumSet = set()
+            countingMax = counting
+            countingMaxNumSet.add(i)
+        elif countingMax == counting:
+            countingMaxNumSet.add(i)
+    maxNum = 0
+    for i in countingMaxNumSet:
+        if maxNum < int(i):
+            maxNum = int(i)
+    return maxNum, countingMax
+
+for i in range(times):
+    answer = dup(list1[i])
+    print(f'#{i+1} {answer[0]} {answer[1]}')    
+
+
+
+
+    
