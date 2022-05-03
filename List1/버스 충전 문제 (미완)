@@ -1,0 +1,28 @@
+times = int(input(''))
+list1 = []
+for i in range(times):
+    list2 = []
+    dsc = input('')
+    dsc = list(map(int, dsc.split(' ')))
+    c_p = input('')                 # 충전기 위치
+    c_p = list(map(int, list(c_p.split(' '))))
+    list2.append(dsc)
+    list2.append(c_p)
+    list1.append(list2)
+
+
+def cpMap (list2) :   #[[d한번의 충전으로 갈수 있는 거리,s정류장 수,c충전기 수],[c_p1, c_p2, c_p3]]
+    map_list = []
+    d = list2[0][0]
+    s = list2[0][1]
+    c = list2[0][2]
+    c_p = list2[1]
+    c_p.insert(0,0)
+    c_p.append(s)       #c_p = [0, c_p1, c_p2,..., c_pc, s]  앞 뒤 수의 차이가 d 이하로 되게끔.
+    return c_p,d
+
+for i in range(times):
+    print(cpMap(list1[i]))
+
+
+
