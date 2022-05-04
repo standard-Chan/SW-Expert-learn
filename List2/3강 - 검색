@@ -1,0 +1,57 @@
+## 검색 - 순차검색, 
+
+  ## 순차검색 (순차구조일때 유용, 구현쉽지만 비효율적)
+
+    # 정렬되지 않은 자료의 검색 O(n)
+
+def sequentialSearch (list1, lenList, key):
+    i=0
+    while i<lenList and list1[i]!=key:
+        i+=1
+    if i<lenList and list1[i]==key:
+        return i
+    else:
+        return -1
+
+        # 정렬된 자료 검색 O(n) (전자와 달리 찾으면 실행 종료)
+            # 오름차순일 경우(1,2,3,4...)
+def sequentailSearch2 (list1, lenList, key):
+    i=0
+    while i<lenList and list1[i]<key:
+        i+=1
+    if list1[i]==key:
+        return i
+    else:
+        return -1
+
+    ## 이진검색   (정렬된 자료)
+'''자료의 가운데 항목의 키 값과 비교하여 다음 검색의 위치를 결정하고 검색을 계속하는 방법'''
+        # 순차검색: O(N),   이진 검색: O(logN)
+list1=[2,4,7,9,11,19,23]
+def binarySearch(list1, key):
+    start=0
+    end = len(list1) - 1
+    while start <= end:
+        middle = start+(end - start) // 2
+        print(middle)
+        if key == list1[middle]: #검색성공
+            return True
+        elif key < list1[middle]:
+            end =  middle - 1
+        else:
+            start = middle + 1
+    return False #검색실패
+        # 재귀함수로 구현
+def binarySearch2(list1, low, high, key):
+    if low > high:
+        return False
+    else:
+        middle=(low+high)//2
+        if key==list1[middle]: #검색성공
+            return True
+        elif key<list1[middle]:
+            return binarySearch2(list1, low, middle-1, key)
+        elif list1[middle]<key:
+            return binarySearch2(list1, middle+1, high, key)
+
+print(binarySearch2(list1,0,len(list1)-1, 7))
