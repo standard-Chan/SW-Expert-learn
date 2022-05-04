@@ -1,0 +1,25 @@
+'''
+for i in bit:
+    list1[0]=i
+    for j in bit:
+        list1[1]=j
+        for k in bit:
+            list1[2]=k
+            for l in bit:
+                list1[3]=l
+                print(list1)
+'''
+list1=[0,0,0,0]
+bit=[0,1]
+count=[1]           # 횟수
+# 재귀함수
+def listBit (list1, index, bit, count):
+    if index < 0:
+        print(list1, '  count :', count[0] )
+        count[0]=count[0]+1
+        return list1
+    for i in bit:
+        list1[index]=i
+        listBit(list1, index-1, bit, count)
+
+listBit(list1, 3, bit, count)
