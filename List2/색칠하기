@@ -1,0 +1,45 @@
+times = int(input())
+
+contentsList = []                   # 자료 [ [ [2,2, 3,3, color] , [시작y, 시작x, 끝y, 끝x, 색] ],      [   ]]
+                                    # 구현: 색이 같을경우 -> 합집합, 다를경우 -> 교집합   교집합 개수로 답을 내기
+checkList = []
+answerList = []
+
+for _ in range(times):
+    numOfColor = int(input())
+    tempList=[]
+    for _ in range(numOfColor):
+        contents = input()
+        tempList.append(list(contents.split()))
+    contentsList.append(tempList)
+
+
+def coloring (list1):
+    startY=int(list1[0]); startX=int(list1[1]); endY=int(list1[2]); endX=int(list1[3])
+    color=list1[4]
+    coordinateList=[]
+    for i in range(startY, endY+1):
+        for j in range(startX, endX+1):
+            coordinateList.append(f'{i},{j}')
+    return coordinateList, color
+
+
+for i in range(len(contentsList)):          #checkList = [ ([좌표들],색), ([좌표들],색),  [[],[]] ...]
+    tempList=[]
+    for j in range(len(contentsList[i])):
+        tempList.append(coloring(contentsList[i][j]))
+    checkList.append(tempList)
+
+for i in range(len(checkList)):
+    set1=set()
+    set2=set()
+    set3=set()
+    for j in range(len(checkList[i])):
+        if checkList[i][j][1] == '1':
+            set1 = set1 | set(checkList[i][j][0])
+        elif checkList[i][j][1] == '2':
+            set2 = set2 | set(checkList[i][j][0])    
+    set3 = set1 & set2
+    print(f'#{i+1} {len(set3)}')
+
+        
