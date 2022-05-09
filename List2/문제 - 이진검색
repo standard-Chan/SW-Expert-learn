@@ -1,0 +1,30 @@
+def binarySearch (startPage, endPage, searchPage):
+    count = 0
+
+    while True:
+        count +=1
+        middlePage = (startPage + endPage)//2
+        if middlePage == searchPage:
+            return count
+        elif middlePage < searchPage:
+            startPage = middlePage
+        elif middlePage > searchPage:
+            endPage = middlePage
+
+times = int(input())
+list1 = []
+for i in range(times):
+    tempList=[]
+    tempList = input()
+    list1.append(list(map(int, tempList.split())))
+
+for i in range(times):
+    endPage=list1[i][0]
+    A=binarySearch(1, endPage, list1[i][1])
+    B=binarySearch(1, endPage, list1[i][2])
+    if A<B:
+        print(f'#{i+1} A')
+    elif A>B:
+        print(f'#{i+1} B')
+    else:
+        print(f'#{i+1} 0')
