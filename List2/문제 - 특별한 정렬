@@ -1,0 +1,60 @@
+#구현방법 - 오름차순, 내림차순 정렬을 각각 만든 후 교차로 append 시킴
+
+
+def min1 (list1):
+    minList=[]
+    count=0
+    
+    while count < len(list1)//2:
+        minValue=list1[count]
+        index=count
+        for i in range(count, len(list1)):
+            if minValue > list1[i]:
+                minValue=list1[i]
+                index = i
+        list1[count], list1[index] = minValue, list1[count]
+        minList.append(minValue)
+        count+=1
+
+    return minList
+
+def max1 (list1):
+    maxList=[]
+    count=0
+    length = len(list1)//2
+    if len(list1)%2 == 1:
+        length = len(list1)//2 + 1
+    
+    while count < length:
+        maxValue=list1[count]
+        index=count
+        for i in range(count, len(list1)):
+            if maxValue < list1[i]:
+                maxValue = list1[i]
+                index = i
+        list1[count], list1[index] = maxValue, list1[count]
+        maxList.append(maxValue)
+        count+=1
+
+    return maxList
+
+def listMix (list1, list2):         #list2가 작은수 정렬
+    list3 = []
+    length = 0
+    for i in range(5):
+        list3.append(list1[i])
+        list3.append(list2[i])
+    return list3
+
+times = int(input())
+dataList=[]
+for i in range(times):
+    x = int(input())
+    dataList.append(list(map(int, input().split())))
+
+for i in range(times):
+    answer = ''
+    answerList = listMix(max1(dataList[i]), min1(dataList[i]))
+    for j in range(len(answerList)):
+        answer = answer+' '+str(answerList[j])
+    print(f"#{i+1}{answer}")
