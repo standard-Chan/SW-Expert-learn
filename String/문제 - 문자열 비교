@@ -1,0 +1,29 @@
+ #Brute Force 알고리즘
+ def BruteForce (str1, str2):   #str2에 str1이 있는지 확인(str2가 문자열)
+    count = 0
+    for i in range(len(str2)):
+            for j in range(0,len(str1)):
+                if str2[i+j]!=str1[j]:
+                    count=0
+                    break
+                count += 1
+                if count == len(str1):
+                    return 1
+    
+    return 0
+
+times = int(input())
+list1=[]
+for i in range(times):
+    temp=[]
+    temp.append(input())
+    temp.append(input())
+    list1.append(temp)
+
+for i in range(times):
+    value = BruteForce(list1[i][0], list1[i][1])
+    print(f'#{i+1} {value}')
+    
+#_____________________________________________________________________________________________________________________________________________
+# 오버스택플로우 (시간 복잡도를 줄여야 한다.)
+# 아래는 시간복잡도를 줄인 알고리즘........
