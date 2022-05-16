@@ -1,0 +1,22 @@
+def NChar (str1, str2):     #str1 내부에 있는 문자중, str2에 가장 많은 문자 찾기
+    count=0
+    maxCount=0
+    for c1 in str1:
+        for c2 in str2:
+            if c1 == c2:
+                count+=1
+        if maxCount<count:
+            maxCount=count
+        count=0
+    return maxCount
+
+times = int(input())
+list1=[]
+for i in range(times):
+    tempList=[]
+    tempList.append(input())
+    tempList.append(input())
+    list1.append(tempList)
+
+for i in range(times):
+    print(f'#{i+1} {NChar(list1[i][0], list1[i][1])}')
