@@ -1,0 +1,59 @@
+def palindrome (str1, length):     #str1 전체문자열[[str1], [str2], [str3]...],  length 회문 길이      (palindrome: 회문)
+    if length %2 == 1:                  #mi = middle index,  예시) ABCBA 인 경우: C를 의미, ABCCBA인 경우: 앞 C를 의미 (인덱스)
+        mi = length//2             
+    elif length %2 == 0:
+        mi = length//2-1
+    list1 = []                  #회문을 담을 리스트
+    for i in range(len(str1)):     # i = 세로 줄 (2차원 리스트)
+        for j in range(len(str1[i])-length+1):   # j = 가로 줄
+            if str1[i][j] == str1[i][j+length-1]: # 문자열의 처음과 끝이 같을 경우 (회문길이만큼 건너 띄었을 때, 같을경우))
+                for k in range(mi+1):
+                    list1.append(str1[i][j+k])
+                    if str1[i][j+k] != str1[i][j+length-1-k]:     # 문자열의 처음과 끝이 다른 경우 (회문길이만큼 건너 띄었을 때, 다를경우)
+                        list1.clear()
+                        break
+                    if k == mi:
+                        return list1
+    # 세로
+    for j in range(len(str1[0])):                # j = 가로줄
+        for i in range(len(str1)-length+1):      # i = 세로줄
+            if str1[i][j] == str1[i+length-1][j]:
+                for k in range(mi+1):
+                    list1.append(str1[i+k][j])
+                    if str1[i+k][j] != str1[i+length-1-k][j]:
+                        list1.clear()
+                        break
+                    if k == mi:
+                        return list1
+
+
+def makePal (list1, length):                    #ABCCBA인경우 ABC까지 있는 상태                             
+    if length %2 == 1:       # 이미 ABCBA인경우, ABC 까지는 있는 상태
+        mi = length//2       #ABCCBA인경우 ABC까지 있는 상태   
+        for i in range(mi):
+            list1.append(list1[mi-i-1])
+    elif length %2 == 0:
+        mi = length//2-1
+        for i in range(mi+1):
+            list1.append(list1[mi-i])
+    return list1
+    
+times = int(input())
+list1=[]
+lengthList=[]   # 회문 길이 담아두는 곳
+for i in range(times):
+    stateList=[]
+    stateList = list(map(int,input().split()))          #특성 [입력 STR 수, 회문 길이]
+    numOfStr = stateList[0]
+    lengthList.append(stateList[1])
+    tempList = []
+    for j in range(numOfStr):
+        tempList.append(input())
+    list1.append(tempList)
+
+for i in range(times):
+    list2 = makePal((palindrome(list1[i], lengthList[i])), lengthList[i])
+    print(f'#{i+1}', end=' ')    
+    for j in list2:
+        print(j, end='')
+    print()
