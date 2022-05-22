@@ -1,28 +1,36 @@
-times = int(input(''))
-list1 = []
+def drive (d, stList, position=0):     # d=한번에 이동할 수 있는 거리, stList=정류장, p=위치
+    count = 0
+    initialValue = d
+    while position+d < len(stList):
+        if stList[position+d] == 1:     # 1은 충전기가 있는 정류장
+            position += d
+            count += 1
+            d= initialValue
+        else:
+            d-=1
+        if d == 0:
+            return 0
+    return count
+
+times = int(input())
+stateList=[]            #[[d,s,c],[],[]]
+chargerList=[]          #[[1,3,5,7,9],[],[]]    충전기 위치
+stationList=[]          #[[0,1,0,0,1,0....],[],[]]
+for i in range(times):  # distance, station, charger
+    tempList=list(map(int,input().split()))
+    stateList.append(tempList)
+    tempList2=list(map(int,input().split()))
+    chargerList.append(tempList2)
+
 for i in range(times):
-    list2 = []
-    dsc = input('')
-    dsc = list(map(int, dsc.split(' ')))
-    c_p = input('')                 # 충전기 위치
-    c_p = list(map(int, list(c_p.split(' '))))
-    list2.append(dsc)
-    list2.append(c_p)
-    list1.append(list2)
-
-
-def cpMap (list2) :   #[[d한번의 충전으로 갈수 있는 거리,s정류장 수,c충전기 수],[c_p1, c_p2, c_p3]]
-    map_list = []
-    d = list2[0][0]
-    s = list2[0][1]
-    c = list2[0][2]
-    c_p = list2[1]
-    c_p.insert(0,0)
-    c_p.append(s)       #c_p = [0, c_p1, c_p2,..., c_pc, s]  앞 뒤 수의 차이가 d 이하로 되게끔.
-    return c_p,d
+    tempList=[]
+    for j in range(stateList[i][1]):
+        tempList+=[0]
+    stationList.append(tempList)
 
 for i in range(times):
-    print(cpMap(list1[i]))
+    for j in chargerList[i]:
+        stationList[i][j]=1
 
-
-
+for i in range(times):
+    print(f'#{i+1} {drive(stateList[i][0], stationList[i])}')
