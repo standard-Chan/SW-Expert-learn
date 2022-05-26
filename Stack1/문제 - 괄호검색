@@ -1,0 +1,31 @@
+# ())  인 경우, 즉 [-1]이 없어서 작동이 안되는 경우 고려할것.
+def bracketSearch (string):
+    stack = []          #append = push, pop= pop
+    for i in string:
+        if i == '(' or i == '{':
+            stack.append(i)
+        elif i == ')':
+            if not bool(stack):
+                return 0
+            elif stack[-1]=='(':
+                stack.pop()
+            else :
+                return 0
+        elif i == '}':
+            if not bool(stack):
+                return 0
+            elif stack[-1]=='{':
+                stack.pop()
+            else :
+                return 0
+    if stack:
+        return 0
+    return 1
+
+times = int(input())
+list1=[]
+for i in range(times):
+    list1.append(input())
+
+for i in range(times):
+    print(f'#{i+1} {bracketSearch(list1[i])}')
