@@ -1,0 +1,20 @@
+# Memoization 은 memoizq의 동사형
+# 동일한 계산을 반복해야 할 때, 이전에 계산한 값을 메모리에 저장 함으로써 동일한 계산의 반복수행을 제거하는 것
+
+# memoization 없는 경우    -> 엄청난 중복호출
+
+def fibo (n):
+    if n < 2:
+        return n
+    else:
+        return fibo(n) + fibo(n-1)
+
+# memoization
+def fibo1(n):
+    global memo
+    if n>=2 and len(memo)<=n:
+        memo.append(fibo1(n-1)+fibo1(n-2))
+    return memo[n]
+memo = [0,1]
+
+print(fibo1(5))
